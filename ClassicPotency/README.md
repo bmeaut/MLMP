@@ -37,4 +37,4 @@
 - **C17** During an inheritance between two nodes, the descendant must inherit every field of the parent. This requirement was deduced by us, as it reflects the most commonly used semantics of inheritance.
 
 #### References:
-- Atkinson, C., Kühne, T.: The essence of multilevel metamodeling. In: Proceedings of the 4th International Conference on The Uniﬁed Modeling Language, Modeling Languages, Concepts, and Tools, pp. 19–33. Springer-Verlag, Berlin, Heidelberg (2001). URL http://dl.acm.org/citation.cfm?id=647245.719475
+- Atkinson, C., Kühne, T.: The essence of multilevel metamodeling. In: Proceedings of the 4th International Conference on The Uniﬁed Modeling Language, Modeling Languages, Concepts, and Tools, pp. 19–33. Springer-Verlag, Berlin, Heidelberg (2001). [URL]( http://dl.acm.org/citation.cfm?id=647245.719475)

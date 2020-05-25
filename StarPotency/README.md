@@ -7,5 +7,4 @@
 - **SP2** Star potency can be assigned to nodes, edges, and fields.
 
 #### References:
-- Gerbig, R.: The level-agnostic modeling language: Language specification and tool implementation. Master’s thesis, Mannheim (2011). URL https://madoc.bib.unimannheim.de/37153/
-
+- Gerbig, R.: The level-agnostic modeling language: Language specification and tool implementation. Master’s thesis, Mannheim (2011). [URL](https://madoc.bib.uni-mannheim.de/37153/1/arbeit.pdf)

@@ -13,6 +13,5 @@
 - **O5** "Pure instances, typically representing domain particulars, have order zero, since they do not classify any instances." Therefore, a model element with a potency value 0 must have an order of 0.
 
 #### References:
-- Kühne, T.: Exploring potency. In: Proc. of the 21th ACM/IEEE International Conference on Model Driven Engineering Languages and Systems, MODELS ’18, pp. 2–12. ACM, New York, NY, USA (2018). DOI 10.1145/3239372.3239411
-- Kühne, T.: A story of levels. In: Proceedings of MODELS 2018 Workshops, Copenhagen, Denmark, 2018, pp. 673–682 (2018). URL http://ceur-ws.org/Vol2245/multi_paper_5.pdf
-
+- Kühne, T.: Exploring potency. In: Proc. of the 21th ACM/IEEE International Conference on Model Driven Engineering Languages and Systems, MODELS ’18, pp. 2–12. ACM, New York, NY, USA (2018). [URL](https://www.doi.org/10.1145/3239372.3239411)
+- Kühne, T.: A story of levels. In: Proceedings of MODELS 2018 Workshops, Copenhagen, Denmark, 2018, pp. 673–682 (2018). [URL](http://ceur-ws.org/Vol-2245/multi_paper_5.pdf)
