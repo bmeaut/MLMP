@@ -1,0 +1,504 @@
+// Level 3
+Configuration: node {
+    @potency = 3;
+    @level = 3;
+    isAbstract = false;
+
+    fields {
+        salesPrice: field {
+            @potency = 2;
+            @level = 3;
+            @nature = simple;
+            type = int;
+        }
+
+        name: field {
+            @potency = 3;
+            @level = 3;
+            @nature = dual;
+            type = string;
+        }
+    }
+}
+
+Part: node {
+    @potency = 0;
+    @level = 3;
+    isAbstract = true;
+
+    fields {
+        weight: field {
+            @potency = 3;
+            @level = 3;
+            @nature = simple;
+            type = float;
+        }
+
+        size: field {
+            @potency = 3;
+            @level = 3;
+            @nature = simple;
+            type = float;
+        }
+    }
+}
+
+BasicPart: node {
+    @potency = 3;
+    @level = 3;
+    isAbstract = false;
+
+    fields {
+        weight: field {
+            @potency = 3;
+            @level = 3;
+            @nature = simple;
+            type = float;
+        }
+
+        size: field {
+            @potency = 3;
+            @level = 3;
+            @nature = simple;
+            type = float;
+        }
+    }
+}
+
+Component: node {
+    @potency = 3;
+    @level = 3;
+    isAbstract = false;
+
+    fields {
+        weight: field {
+            @potency = 3;
+            @level = 3;
+            @nature = simple;
+            type = float;
+        }
+
+        size: field {
+            @potency = 3;
+            @level = 3;
+            @nature = simple;
+            type = float;
+        }
+    }
+}
+
+Configuration_Part: edge {
+    @potency = 3;
+    @level = 3;
+    source = Configuration;
+    target = Part;
+
+    leftMin = 1;
+    leftMax = 1;
+    rightMin = 0;
+    rightMax = *;
+}
+
+Component_Part: edge {
+    @potency = 3;
+    @level = 3;
+    source = Component;
+    target = Part;
+
+    leftMin = 1;
+    leftMax = 1;
+    rightMin = 0;
+    rightMax = *;
+}
+
+BasicPart_Inh: inheritance {
+    @potency = 0;
+    @level = 3;
+    source = BasicPart;
+    target = Part;
+}
+
+Component_Inh: inheritance {
+    @potency = 0;
+    @level = 3;
+    source = Component;
+    target = Part;
+}
+
+
+// Level 2
+Bicycle: Configuration {
+    @potency = 2;
+    @level = 2;
+    isAbstract = false;
+
+    fields {
+        salesPrice: field {
+            @potency = 1;
+            @level = 2;
+            @nature = simple;
+        }
+
+        name: field {
+            @potency = 2;
+            @level = 2;
+            @nature = dual;
+            value = "Bicycle";
+        }
+    }
+}
+
+Customer: node {
+    @potency = 2;
+    @level = 2;
+    isAbstract = false;
+}
+
+Wheel: Component {
+    @potency = 2;
+    @level = 2;
+    isAbstract = false;
+
+    fields {
+        weight: field {
+            @potency = 2;
+            @level = 2;
+            @nature = simple;
+        }
+
+        size: field {
+            @potency = 2;
+            @level = 2;
+            @nature = simple;
+        }
+    }
+}
+
+Frame: Component {
+    @potency = 2;
+    @level = 2;
+    isAbstract = false;
+
+    fields {
+        weight: field {
+            @potency = 2;
+            @level = 2;
+            @nature = simple;
+        }
+
+        size: field {
+            @potency = 2;
+            @level = 2;
+            @nature = simple;
+        }
+    }
+}
+
+Suspension: BasicPart {
+    @potency = 2;
+    @level = 2;
+
+    fields {
+        weight: field {
+            @potency = 2;
+            @level = 2;
+            @nature = simple;
+        }
+
+        size: field {
+            @potency = 2;
+            @level = 2;
+            @nature = simple;
+        }
+    }
+}
+
+Customer_Bicycle: edge {
+    @potency = 2;
+    @level = 2;
+    source = Customer;
+    target = Bicycle;
+
+    leftMin = 0;
+    leftMax = 1;
+    rightMin = 0;
+    rightMax = *;
+}
+
+Bicycle_Wheel: Configuration_Part {
+    @potency = 2;
+    @level = 2;
+    source = Bicycle;
+    target = Wheel;
+
+    leftMin = 1;
+    leftMax = 1;
+    rightMin = 2;
+    rightMax = 2;
+}
+
+Bicycle_Frame: Configuration_Part {
+    @potency = 2;
+    @level = 2;
+    source = Bicycle;
+    target = Frame;
+
+    leftMin = 1;
+    leftMax = 1;
+    rightMin = 1;
+    rightMax = 1;
+}
+
+Frame_Suspension: Component_Part {
+    @potency = 2;
+    @level = 2;
+    source = Frame;
+    target = Suspension;
+
+    leftMin = 1;
+    leftMax = 1;
+    rightMin = 0;
+    rightMax = 1;
+}
+
+
+// Level 1
+RacingBike: Bicycle {
+    @potency = 1;
+    @level = 1;
+    isAbstract = false;
+
+    fields {
+        salesPrice: field {
+            @potency = 0;
+            @level = 1;
+            @nature = simple;
+            value = 2000;
+        }
+
+        name: field {
+            @potency = 1;
+            @level = 1;
+            @nature = dual;
+            value = "RacingBike";
+        }
+    }
+}
+
+WheelModel: Wheel {
+    @potency = 1;
+    @level = 1;
+    isAbstract = false;
+
+    fields {
+        weight: field {
+            @potency = 1;
+            @level = 1;
+            @nature = simple;
+        }
+
+        size: field {
+            @potency = 1;
+            @level = 1;
+            @nature = simple;
+        }
+    }
+}
+
+RaceFrame: Frame {
+    @potency = 1;
+    @level = 1;
+    isAbstract = false;
+
+    fields {
+        weight: field {
+            @potency = 1;
+            @level = 1;
+            @nature = simple;
+        }
+
+        size: field {
+            @potency = 1;
+            @level = 1;
+            @nature = simple;
+        }
+    }
+}
+
+CustomerModel: Customer {
+    @potency = 1;
+    @level = 1;
+    isAbstract = false;
+}
+
+RacingBike_WheelModel: Bicycle_Wheel {
+    @potency = 1;
+    @level = 1;
+    source = RacingBike;
+    target = WheelModel;
+
+    leftMin = 1;
+    leftMax = 1;
+    rightMin = 2;
+    rightMax = 2;
+}
+
+RacingBike_RaceFrame: Bicycle_Frame {
+    @potency = 1;
+    @level = 1;
+    source = RacingBike;
+    target = RaceFrame;
+
+    leftMin = 1;
+    leftMax = 1;
+    rightMin = 1;
+    rightMax = 1;
+}
+
+CustomerModel_RacingBike: Customer_Bicycle {
+    @potency = 1;
+    @level = 1;
+    source = CustomerModel;
+    target = RacingBike;
+
+    leftMin = 0;
+    leftMax = 1;
+    rightMin = 0;
+    rightMax = *;
+}
+
+
+// Level 0
+Bike134123: RacingBike {
+    @potency = 0;
+    @level = 0;
+    isAbstract = false;
+
+    fields {
+        name: field {
+            @potency = 0;
+            @level = 0;
+            @nature = dual;
+            value = "Falcon";
+        }
+    }
+}
+
+SusanStorm: CustomerModel {
+    @potency = 0;
+    @level = 0;
+    isAbstract = false;
+}
+
+FrameX504: RaceFrame {
+    @potency = 0;
+    @level = 0;
+    isAbstract = false;
+
+    fields {
+        weight: field {
+            @potency = 0;
+            @level = 0;
+            @nature = simple;
+            value = 20;
+        }
+
+        size: field {
+            @potency = 0;
+            @level = 0;
+            @nature = simple;
+            value = 2;
+        }
+    }
+}
+
+FrontWheel: WheelModel {
+    @potency = 0;
+    @level = 0;
+    isAbstract = false;
+
+    fields {
+        weight: field {
+            @potency = 0;
+            @level = 0;
+            @nature = simple;
+            value = 4;
+        }
+
+        size: field {
+            @potency = 0;
+            @level = 0;
+            value = 0.5;
+        }
+    }
+}
+
+RearWheel: WheelModel {
+    @potency = 0;
+    @level = 0;
+    isAbstract = false;
+
+    fields {
+        weight: field {
+            @potency = 0;
+            @level = 0;
+            @nature = simple;
+            value = 4;
+        }
+
+        size: field {
+            @potency = 0;
+            @level = 0;
+            @nature = simple;
+            value = 0.5;
+        }
+    }
+}
+
+Bike134123_FrontWheel: RacingBike_WheelModel {
+    @potency = 0;
+    @level = 0;
+    source = Bike134123;
+    target = FrontWheel;
+
+    leftMin = 1;
+    leftMax = 1;
+    rightMin = 1;
+    rightMax = 1;
+}
+
+Bike134123_RearWheel: RacingBike_WheelModel {
+    @potency = 0;
+    @level = 0;
+    source = Bike134123;
+    target = RearWheel;
+
+    leftMin = 1;
+    leftMax = 1;
+    rightMin = 1;
+    rightMax = 1;
+}
+
+Bike134123_FrameX504: RacingBike_RaceFrame {
+    @potency = 0;
+    @level = 0;
+    source = Bike134123;
+    target = FrameX504;
+
+    leftMin = 1;
+    leftMax = 1;
+    rightMin = 1;
+    rightMax = 1;
+}
+
+SusanStorm_Bike134123: CustomerModel_RacingBike {
+    @potency = 0;
+    @level = 0;
+    source = SusanStorm;
+    target = Bike134123;
+
+    leftMin = 1;
+    leftMax = 1;
+    rightMin = 1;
+    rightMax = 1;
+}

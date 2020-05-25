@@ -1,0 +1,28 @@
+// M0 - fixed
+EClass: node {
+    @potencyMin = 0;
+    @potencyMax = *;
+    isAbstract = false;
+    isInterface = false;
+
+    attributes {
+        EAttribute: attribute {
+            @potencyMin = 0;
+            @potencyMax = *;
+            @level = 0;
+        }
+    }
+}
+
+EReference: arrow {
+    @potencyMin = 0;
+    @potencyMax = *;
+    @level = 0;
+    source = EClass;
+    target = EClass;
+
+    leftMin = *;
+    leftMax = *;
+    rightMin = *;
+    rightMax = *;
+}

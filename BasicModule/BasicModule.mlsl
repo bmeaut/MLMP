@@ -1,0 +1,33 @@
+struct {
+    node: entity {
+        fields: field[];
+        isAbstract: bool;
+    }
+
+    field: slot {
+        value: slot.value;
+        type: slot.type;
+     }
+
+    edge: entity {
+		source: node;
+		target: node;
+
+		leftMin: int;
+		leftMax: int;
+		rightMin: int;
+		rightMax: int;
+	}
+
+	inheritance: edge {	}
+}
+
+rules {
+    #B1: edge.leftMax >= edge.leftMin;
+    #B2: edge.rightMax >= edge.rightMin;
+    #B3: inheritance.leftMin = 1;
+    #B4: inheritance.leftMax = 1;
+    #B5: inheritance.rightMin = 1;
+    #B6: inheritance.rightMax = 1;
+    #B7: inheritance.source.fields subSetOf inheritance.target.fields;
+}

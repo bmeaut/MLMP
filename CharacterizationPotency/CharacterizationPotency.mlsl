@@ -1,0 +1,11 @@
+rules {
+    omit N3, E3, F3;
+
+	// node instantiation
+    #N3: node.potency < node.meta.potency;
+    #F3: field.potency < field.meta.potency where field in node.fields;
+
+		
+	// edge instantiation
+    #E3:edge.potency < edge.meta.potency;
+}

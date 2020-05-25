@@ -1,0 +1,52 @@
+metrics {
+    override mutable potency? in {0..*} on node, edge, field;
+	mutable leapPotency? in {2..*} on node, edge;
+}
+
+rules {
+    omit N1, N2, N3, F2, F3, E1, E2, E3;
+
+    #LP1: (potency = null and leapPotency != null) or
+        (potency != null and leapPotency = null);
+    #LP2: field.potency != null;
+
+    #LP3: leapPotency <= level;
+    #LP4: inheritance.leapPotency = null;
+
+    #LP5: if (node.leapPotency != null) {
+        field.potency = node.leapPotency
+            where field in node.fields;
+    }
+
+    // node instantiation
+    #LP6: if (node.meta.potency != null) {
+        node.meta.potency != 0;
+        node.level = node.meta.level - 1;
+        node.potency = node.meta.potency - 1;
+
+        // field instantiation
+        field.level = field.meta.level - 1
+            where field in node.fields;
+        field.potency = field.meta.potency - 1
+            where field in node.fields;
+    }
+    else if (node.meta.leapPotency != null) {
+        node.level = node.meta.level - node.meta.leapPotency;
+        node.potency = 0;
+
+        field.level = field.meta.level - node.meta.leapPotency
+            where field in node.fields;
+        field.potency = 0;
+    }
+
+    // edge instantiation
+    #LP7: if (edge.meta.potency != null) {
+        edge.meta.potency != 0;
+        edge.level = edge.meta.level - 1;
+        edge.potency = edge.meta.potency - 1;
+    }
+    else if (edge.meta.leapPotency != null) {
+        edge.level = edge.meta.level - edge.meta.leapPotency;
+        edge.potency = 0;
+    }
+}

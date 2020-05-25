@@ -1,0 +1,27 @@
+metrics {
+    mutable level in {0..*} on node, arrow, attribute;
+    mutable potencyMin in {0..*} on node, arrow, attribute;
+    mutable potencyMax in {0..*} on node, arrow, attribute;
+}
+
+rules {
+    #RP1: potencyMax >= potencyMin;
+
+    #RP2: inheritance.potencyMin = 0;
+    #RP3: inheritance.potencyMax = 0;
+
+	#RP4: attribute.level = node.level where attribute in node.attributes;
+	#RP5: arrow.source.level = arrow.target.level = arrow.level;
+
+	#RP6: node.meta.potencyMax != 0;
+    #RP7: node.level <= node.meta.level + node.meta.potencyMax;
+    #RP8: node.level >= node.meta.level + node.meta.potencyMin;
+
+    #RP9: attribute.meta.potencyMax != 0 where attribute in node.attributes;
+    #RP10: attribute.level <= attribute.meta.level + attribute.meta.potencyMax where attribute in node.attributes;
+    #RP11: attribute.level >= attribute.meta.level + attribute.meta.potencyMin where attribute in node.attributes;
+
+    #RP12: arrow.meta.potencyMax != 0;
+    #RP13: arrow.level <= arrow.meta.level + arrow.meta.potencyMax;
+    #RP14: arrow.level >= arrow.meta.level + arrow.meta.potencyMin;
+}

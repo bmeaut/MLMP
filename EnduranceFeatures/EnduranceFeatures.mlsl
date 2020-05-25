@@ -1,0 +1,24 @@
+metrics {
+    mutable durability in {0..*} on field;
+	mutable mutability in {0..*} on field.value;
+}
+
+rules {
+    #DU1: field.meta.durability != 0;
+    #DU2: field.durability = field.meta.durability - 1
+          where field in node.fields;
+    #DU3: if (node.isAbstract) {
+    		    field.durability > 0 where field in node.fields;
+          }
+
+    #DU4: if (!node.isAbstract) {
+                field.durability <= node.potency where field in node.fields;
+          }
+
+    #MU1: mutability <= durability;
+    #MU2: field.meta.value.mutability !=0;
+    #MU3: field.value.mutability = field.meta.value.mutability - 1;
+    #MU4: if (node.isAbstract) {
+          		field.value.mutability > 0 where field in node.fields;
+          }
+}

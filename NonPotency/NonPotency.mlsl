@@ -1,0 +1,16 @@
+metrics {
+    override mutable potency? in {0..*} on node, edge, field; // Single-potency + Multi-potency
+	immutable nonPotency? in {1..1} on node, edge, field;
+}
+
+rules {
+	#NP1: (potency = null and nonPotency != null) or (potency != null and nonPotency = null);
+	#NP2: inheritanceEdge.nonPotency = 1;
+
+	// node instantiation
+	#NP3: node.meta.nonPotency = null;
+	#NP4: field.meta.nonPotency = null where field in node.fields;
+
+	// edge instantiation
+	#NP5: edge.meta.nonPotency = null;
+}

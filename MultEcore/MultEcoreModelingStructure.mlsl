@@ -1,0 +1,33 @@
+struct {
+    clabject: entity { }
+
+    node: clabject {
+        attributes: attribute[];
+        isAbstract: bool;
+        isInterface: bool;
+    }
+
+    attribute: clabject {
+        value: slot.value;
+        type: slot.type;
+     }
+
+    arrow: entity {
+		source: node;
+		target: node;
+
+		leftMin: int;
+		leftMax: int;
+		rightMin: int;
+		rightMax: int;
+	}
+
+	inheritance: arrow {}
+}
+
+rules {
+    #ME1: arrow.leftMax >= arrow.leftMin;
+    #ME2: arrow.rightMax >= arrow.rightMin;
+    #ME3: arrow.source.meta = arrow.meta.source;
+    #ME4: arrow.target.meta = arrow.meta.target;
+}
