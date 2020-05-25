@@ -5,7 +5,7 @@ metrics {
 
 rules {
 	#NP1: (potency = null and nonPotency != null) or (potency != null and nonPotency = null);
-	#NP2: inheritanceEdge.nonPotency = 1;
+	#NP2: inheritance.nonPotency = 1;
 
 	// node instantiation
 	#NP3: node.meta.nonPotency = null;
