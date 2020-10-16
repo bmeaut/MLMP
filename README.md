@@ -4,3 +4,9 @@ This repository contains examples of our Multi-Level Modeling Playground (MLMP),
 - domain specifications (e.g., DomainBicycle)
 
 Where applicable, dependencies and related references can be found separately in every sub folder.
+
+Contact:
+gmezei@aut.bme.hu
+somogyi.ferenc@aut.bme.hu
+bacsi.sandor@aut.bme.hu
+tholiq@gmail.com
