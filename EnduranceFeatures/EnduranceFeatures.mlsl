@@ -1,40 +1,28 @@
 metrics {
-    override mutable potency in {0..*} on node, edge;
-    mutable durability in {0..*} on field;
-	mutable mutability in {0..*} on field.value;
+    override mutable potency? in {0..*} on Node, Edge;
+    mutable durability in {0..*} on Field;
+	mutable mutability in {0..*} on Field.value;
 }
 
 rules {
-    omit CP3, CP4, CP5, F1, F3;
+    omit CP4, F1, F3;
 
-    #CP3: if (node.isAbstract) {
-                node.potency = 0;
-                field.durability > 0 where field in node.fields;
-          }
+    #CP4: if (Field.nature = simple) {
+            if (Field.durability > 0) {
+                Field.value = null;
+            }
+     }
 
-    #CP4: if (!node.isAbstract) {
-                field.durability <= node.potency where field in node.fields;
-          }
-
-    #CP5: if (field.nature = simple) {
-                if (field.durability > 0) {
-                    field.value = null;
-                }
-     	}
-     	else if (field.nature = dual) {
-                field.value != null;
-     	}
-
-    #F1: field.meta.durability != 0;
-    #F3: field.durability = field.meta.durability - 1
-          where field in node.fields;
+    #F1: Field.meta.durability != 0;
+    #F3: Field.durability = Field.meta.durability - 1
+          where Field in Node.fields;
 
     #DU1: durability <= level;
 
     #MU1: mutability <= durability;
-    #MU2: field.meta.value.mutability != 0;
-    #MU3: field.value.mutability = field.meta.value.mutability - 1;
-    #MU4: if (node.isAbstract) {
-          		field.value.mutability > 0 where field in node.fields;
-          }
+    #MU2: Field.meta.value.mutability !=0;
+    #MU3: Field.value.mutability = Field.meta.value.mutability - 1;
+    #MU4: if (Node.isAbstract) {
+            Field.value.mutability > 0 where Field in Node.fields;
+    }
 }

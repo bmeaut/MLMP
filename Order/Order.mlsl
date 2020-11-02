@@ -1,16 +1,15 @@
 metrics {
-    mutable order in {0..*} on node;
+    mutable order in {0..*} on Node;
 }
 
 rules {
     #O1: potency <= order;
 	#O2: order <= level;
 	
-	#O3: if (node.isAbstract) {
-		node.order > 0;
+	#O3: if (Node.isAbstract) {
+		Node.order > 0;
 	}
 
-	//node instantiation
-	#O4: node.meta.order !=0;
-    #O5: node.order = node.meta.order - 1;
+	#O4: Node.meta.order !=0;
+    #O5: Node.order = Node.meta.order - 1;
 }

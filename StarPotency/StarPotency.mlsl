@@ -1,29 +1,24 @@
 metrics {
-    override mutable potency? in {-1..*} on node, edge, field;
+    override mutable potency? in {-1..*} on Node, Edge, Field;
 }
 
 rules {
-	omit CP1, CP4, N3, E3, F2, F3;
-	#CP1: if (potency != -1) {
-	    potency <= level;
-	}
+	omit N3, E3, F3;
 
-	#CP4: if (!node.isAbstract and node.potency != -1) {
-		field.potency <= node.potency where field in node.fields;
-	}
-
-    // node instantiation
-    #N3: if (node.meta.potency != -1) {
-        node.potency = node.meta.potency - 1;
+    #N3: if (Node.meta.potency != -1) {
+        Node.potency = Node.meta.potency - 1;
+    }
+	
+	#E3: if (Edge.meta.potency != -1) {
+        Edge.potency = Edge.meta.potency - 1;
     }
 
-    #F2: field.level = field.meta.level - 1
-        where field in node.fields and field.meta.potency != -1;
-    #F3: field.potency = field.meta.potency - 1
-        where field in node.fields and field.meta.potency != -1;
+    #F3: if (Field.meta.potency != -1) {
+        Field.potency = Field.meta.potency - 1
+                where Field in Node.fields;
+     }
 
-    // edge instantiation
-    #E3: if (edge.meta.potency != -1) {
-        edge.potency = edge.meta.potency - 1;
+    #SP1: if (Node.potency != -1) {
+        Field.potency != -1 where Field in Node.fields;
     }
 }

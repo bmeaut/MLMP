@@ -1,17 +1,17 @@
 struct {
-    node: entity {
-        fields: field[];
+    Node: entity {
+        fields: Field[];
         isAbstract: bool;
     }
 
-    field: slot {
+    Field: slot {
         value: slot.value;
         type: slot.type;
      }
 
-    edge: entity {
-		source: node;
-		target: node;
+    Edge: entity {
+		source: Node;
+		target: Node;
 
 		leftMin: int;
 		leftMax: int;
@@ -19,15 +19,26 @@ struct {
 		rightMax: int;
 	}
 
-	inheritance: edge {	}
+	Inheritance: Edge {	}
+}
+
+metrics {
+    mutable level in {0..*} on Node, Edge, Field;
 }
 
 rules {
-    #B1: edge.leftMax >= edge.leftMin;
-    #B2: edge.rightMax >= edge.rightMin;
-    #B3: inheritance.leftMin = 1;
-    #B4: inheritance.leftMax = 1;
-    #B5: inheritance.rightMin = 1;
-    #B6: inheritance.rightMax = 1;
-    #B7: inheritance.source.fields subSetOf inheritance.target.fields;
+    #B1: Edge.leftMax >= Edge.leftMin;
+    #B2: Edge.rightMax >= Edge.rightMin;
+
+    #B3: Inheritance.leftMin = 1;
+    #B4: Inheritance.leftMax = 1;
+    #B5: Inheritance.rightMin = 1;
+    #B6: Inheritance.rightMax = 1;
+    #B7: Inheritance.source.fields subSetOf Inheritance.target.fields;
+
+    // #B8: Edge.source.level = Edge.target.level = Edge.level;
+    #B8_1: Edge.source.level = Edge.target.level;
+    #B8_2: Edge.source.level = Edge.level;
+    #B9: Edge.source.meta = Edge.meta.source;
+    #B10: Edge.target.meta = Edge.meta.target;
 }

@@ -1,51 +1,36 @@
 metrics {
-    mutable level in {0..*} on node, edge, field;
-    mutable potency in {0..*} on node, edge, field;
-	immutable nature in {simple, dual} on field;
+    mutable potency? in {0..*} on Node, Edge, Field;
+	immutable nature in {simple, dual} on Field;
 }
 
 rules {
 	#CP1: potency <= level;
-	#CP2: field.level = node.level where field in node.fields;
+	#CP2: Field.level = Node.level where Field in Node.fields;
 
-    #CP3: if (node.isAbstract) {
-        node.potency = 0;
-		field.potency > 0 where field in node.fields;
+    #CP3: if (Node.isAbstract) {
+        Node.potency = 0;
 	}
 
-	#CP4: if (!node.isAbstract) {
-		field.potency <= node.potency where field in node.fields;
+	#CP4: if (Field.nature = simple) {
+		if (Field.potency > 0) { Field.value = null; }
 	}
 
-	#CP5: if (field.nature = simple) {
-		if (field.potency > 0) {
-			field.value = null;
-		}
-	}
-	else if (field.nature = dual) {
-		field.value != null;
-	}
-
-    #CP6: edge.source.level = edge.target.level = edge.level;
-    #CP7: edge.source.meta = edge.meta.source;
-    #CP8: edge.target.meta = edge.meta.target;
-
-	#CP9: inheritance.potency = 0;
+	#CP5: Inheritance.potency = 0;
 
     // node instantiation
-    #N1: node.meta.potency != 0;
-    #N2: node.level = node.meta.level - 1;
-    #N3: node.potency = node.meta.potency - 1;
+    #N1: Node.meta.potency != 0;
+    #N2: Node.level = Node.meta.level - 1;
+    #N3: Node.potency = Node.meta.potency - 1;
 
     // field instantiation
-    #F1: field.meta.potency != 0;
-    #F2: field.level = field.meta.level - 1
-        where field in node.fields;
-    #F3: field.potency = field.meta.potency - 1
-        where field in node.fields;
+    #F1: Field.meta.potency != 0;
+    #F2: Field.level = Field.meta.level - 1
+        where Field in Node.fields;
+    #F3: Field.potency = Field.meta.potency - 1
+        where Field in Node.fields;
 
     // edge instantiation
-    #E1: edge.meta.potency != 0;
-    #E2: edge.level = edge.meta.level - 1;
-    #E3: edge.potency = edge.meta.potency - 1;
+    #E1: Edge.meta.potency != 0;
+    #E2: Edge.level = Edge.meta.level - 1;
+    #E3: Edge.potency = Edge.meta.potency - 1;
 }

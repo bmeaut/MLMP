@@ -1,18 +1,18 @@
 // Level 3
-Configuration: node {
+Configuration: Node {
     @potency = 3;
     @level = 3;
     isAbstract = false;
 
     fields {
-        salesPrice: field {
+        salesPrice: Field {
             @potency = 2;
             @level = 3;
             @nature = simple;
             type = int;
         }
 
-        name: field {
+        name: Field {
             @potency = 3;
             @level = 3;
             @nature = dual;
@@ -21,20 +21,20 @@ Configuration: node {
     }
 }
 
-Part: node {
+Part: Node {
     @potency = 0;
     @level = 3;
     isAbstract = true;
 
     fields {
-        weight: field {
+        weight: Field {
             @potency = 3;
             @level = 3;
             @nature = simple;
             type = float;
         }
 
-        size: field {
+        size: Field {
             @potency = 3;
             @level = 3;
             @nature = simple;
@@ -43,20 +43,20 @@ Part: node {
     }
 }
 
-BasicPart: node {
+BasicPart: Node {
     @potency = 3;
     @level = 3;
     isAbstract = false;
 
     fields {
-        weight: field {
+        weight: Field {
             @potency = 3;
             @level = 3;
             @nature = simple;
             type = float;
         }
 
-        size: field {
+        size: Field {
             @potency = 3;
             @level = 3;
             @nature = simple;
@@ -65,20 +65,20 @@ BasicPart: node {
     }
 }
 
-Component: node {
+Component: Node {
     @potency = 3;
     @level = 3;
     isAbstract = false;
 
     fields {
-        weight: field {
+        weight: Field {
             @potency = 3;
             @level = 3;
             @nature = simple;
             type = float;
         }
 
-        size: field {
+        size: Field {
             @potency = 3;
             @level = 3;
             @nature = simple;
@@ -87,7 +87,7 @@ Component: node {
     }
 }
 
-Configuration_Part: edge {
+Configuration_Part: Edge {
     @potency = 3;
     @level = 3;
     source = Configuration;
@@ -99,7 +99,7 @@ Configuration_Part: edge {
     rightMax = *;
 }
 
-Component_Part: edge {
+Component_Part: Edge {
     @potency = 3;
     @level = 3;
     source = Component;
@@ -111,18 +111,28 @@ Component_Part: edge {
     rightMax = *;
 }
 
-BasicPart_Inh: inheritance {
+BasicPart_Inh: Inheritance {
     @potency = 0;
     @level = 3;
     source = BasicPart;
     target = Part;
+
+    leftMin = 1;
+    leftMax = 1;
+    rightMin = 1;
+    rightMax = 1;
 }
 
-Component_Inh: inheritance {
+Component_Inh: Inheritance {
     @potency = 0;
     @level = 3;
     source = Component;
     target = Part;
+
+    leftMin = 1;
+    leftMax = 1;
+    rightMin = 1;
+    rightMax = 1;
 }
 
 
@@ -133,13 +143,13 @@ Bicycle: Configuration {
     isAbstract = false;
 
     fields {
-        salesPrice: field {
+        salesPrice: Field {
             @potency = 1;
             @level = 2;
             @nature = simple;
         }
 
-        name: field {
+        name: Field {
             @potency = 2;
             @level = 2;
             @nature = dual;
@@ -148,7 +158,7 @@ Bicycle: Configuration {
     }
 }
 
-Customer: node {
+Customer: Node {
     @potency = 2;
     @level = 2;
     isAbstract = false;
@@ -160,13 +170,13 @@ Wheel: Component {
     isAbstract = false;
 
     fields {
-        weight: field {
+        weight: Field {
             @potency = 2;
             @level = 2;
             @nature = simple;
         }
 
-        size: field {
+        size: Field {
             @potency = 2;
             @level = 2;
             @nature = simple;
@@ -180,13 +190,13 @@ Frame: Component {
     isAbstract = false;
 
     fields {
-        weight: field {
+        weight: Field {
             @potency = 2;
             @level = 2;
             @nature = simple;
         }
 
-        size: field {
+        size: Field {
             @potency = 2;
             @level = 2;
             @nature = simple;
@@ -197,15 +207,16 @@ Frame: Component {
 Suspension: BasicPart {
     @potency = 2;
     @level = 2;
+    isAbstract = false;
 
     fields {
-        weight: field {
+        weight: Field {
             @potency = 2;
             @level = 2;
             @nature = simple;
         }
 
-        size: field {
+        size: Field {
             @potency = 2;
             @level = 2;
             @nature = simple;
@@ -213,7 +224,7 @@ Suspension: BasicPart {
     }
 }
 
-Customer_Bicycle: edge {
+Customer_Bicycle: Edge {
     @potency = 2;
     @level = 2;
     source = Customer;
@@ -269,14 +280,14 @@ RacingBike: Bicycle {
     isAbstract = false;
 
     fields {
-        salesPrice: field {
+        salesPrice: Field {
             @potency = 0;
             @level = 1;
             @nature = simple;
             value = 2000;
         }
 
-        name: field {
+        name: Field {
             @potency = 1;
             @level = 1;
             @nature = dual;
@@ -291,13 +302,13 @@ WheelModel: Wheel {
     isAbstract = false;
 
     fields {
-        weight: field {
+        weight: Field {
             @potency = 1;
             @level = 1;
             @nature = simple;
         }
 
-        size: field {
+        size: Field {
             @potency = 1;
             @level = 1;
             @nature = simple;
@@ -311,13 +322,13 @@ RaceFrame: Frame {
     isAbstract = false;
 
     fields {
-        weight: field {
+        weight: Field {
             @potency = 1;
             @level = 1;
             @nature = simple;
         }
 
-        size: field {
+        size: Field {
             @potency = 1;
             @level = 1;
             @nature = simple;
@@ -375,7 +386,7 @@ Bike134123: RacingBike {
     isAbstract = false;
 
     fields {
-        name: field {
+        name: Field {
             @potency = 0;
             @level = 0;
             @nature = dual;
@@ -396,14 +407,14 @@ FrameX504: RaceFrame {
     isAbstract = false;
 
     fields {
-        weight: field {
+        weight: Field {
             @potency = 0;
             @level = 0;
             @nature = simple;
             value = 20;
         }
 
-        size: field {
+        size: Field {
             @potency = 0;
             @level = 0;
             @nature = simple;
@@ -418,16 +429,17 @@ FrontWheel: WheelModel {
     isAbstract = false;
 
     fields {
-        weight: field {
+        weight: Field {
             @potency = 0;
             @level = 0;
             @nature = simple;
             value = 4;
         }
 
-        size: field {
+        size: Field {
             @potency = 0;
             @level = 0;
+            @nature = simple;
             value = 0.5;
         }
     }
@@ -439,14 +451,14 @@ RearWheel: WheelModel {
     isAbstract = false;
 
     fields {
-        weight: field {
+        weight: Field {
             @potency = 0;
             @level = 0;
             @nature = simple;
             value = 4;
         }
 
-        size: field {
+        size: Field {
             @potency = 0;
             @level = 0;
             @nature = simple;
