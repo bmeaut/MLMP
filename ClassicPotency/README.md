@@ -12,7 +12,7 @@
 
 - **CP5** A cross-level reference is an edge that runs between two nodes that are on different levels. Cross-level references are not allowed. Strictly speaking, this requirement relates to "strict meta-modeling" frameworks like the OCA.
 
-- **CP6** "The potency of a model element is an integer that defines the depth to which a model element can be instantiated." Therefore, every model element can optionally have potency assigned. Model elements with no potency restrictions can be instantiated on any level below in an arbitrary instantiation chain.
+- **CP6** "The potency of a model element is an integer that defines the depth to which a model element can be instantiated." Therefore, every model element must have potency assigned.
 
 - **CP7** "... potency of a model element cannot be greater than its level ..."
 
