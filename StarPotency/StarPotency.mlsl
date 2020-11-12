@@ -1,4 +1,4 @@
-metrics {
+annotations {
     override mutable potency? in {-1..*} on Node, Edge, Field;
 }
 

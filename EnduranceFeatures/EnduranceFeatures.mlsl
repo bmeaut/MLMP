@@ -1,4 +1,4 @@
-metrics {
+annotations {
     override mutable potency? in {0..*} on Node, Edge;
     mutable durability in {0..*} on Field;
 	mutable mutability in {0..*} on Field.value;

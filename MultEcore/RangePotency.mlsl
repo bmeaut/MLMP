@@ -1,4 +1,4 @@
-metrics {
+annotations {
     mutable level in {0..*} on node, arrow, attribute;
     mutable potencyMin in {0..*} on node, arrow, attribute;
     mutable potencyMax in {0..*} on node, arrow, attribute;

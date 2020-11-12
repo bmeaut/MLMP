@@ -1,4 +1,4 @@
-metrics {
+annotations {
     mutable order in {0..*} on Node;
 }
 

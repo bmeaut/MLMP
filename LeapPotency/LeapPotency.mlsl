@@ -1,10 +1,10 @@
-metrics {
-    override mutable potency? in {0..*} on Node, Edge, Field;
-	mutable leapPotency? in {2..*} on Node, Edge;
+annotations {
+    override mutable potency? in {0..*} on ModelElement, Field;
+	mutable leapPotency? in {2..*} on ModelElement;
 }
 
 rules {
-    omit N1, N2, N3, E1, E2, E3, F2, F3;
+    omit I1, I2, I3, F2, F3;
 
     #LP1: (potency = null and leapPotency != null) or
         (potency != null and leapPotency = null);
@@ -13,7 +13,7 @@ rules {
     #LP3: leapPotency <= level;
     #LP4: Inheritance.leapPotency = null;
 
-    // Was N1-3
+    // Replaces I1-3
     #N_classic: if (Node.meta.potency != null) {
         Node.meta.potency != 0;
         Node.level = Node.meta.level - 1;
@@ -26,7 +26,7 @@ rules {
             where Field in Node.fields;
     }
 
-    // Was E1-3
+    // Replaces I1-3
     #E_classic: if (Edge.meta.potency != null) {
             Edge.meta.potency != 0;
             Edge.level = Edge.meta.level - 1;

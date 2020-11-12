@@ -1,36 +1,26 @@
-metrics {
-    mutable potency? in {0..*} on Node, Edge, Field;
+annotations {
+    mutable potency? in {0..*} on ModelElement, Field;
 	immutable nature in {simple, dual} on Field;
 }
 
 rules {
 	#CP1: potency <= level;
-	#CP2: Field.level = Node.level where Field in Node.fields;
-
+    #CP2: Field.level = Node.level where Field in Node.fields;
     #CP3: if (Node.isAbstract) {
-        Node.potency = 0;
-	}
+      Node.potency = 0;
+     }
 
-	#CP4: if (Field.nature = simple) {
-		if (Field.potency > 0) { Field.value = null; }
-	}
+    #CP4: if (Field.nature = simple) {
+      if (Field.potency > 0) { Field.value = null; }
+     }
 
-	#CP5: Inheritance.potency = 0;
+    #CP5: Inheritance.potency != null and Inheritance.potency = 0;
 
-    // node instantiation
-    #N1: Node.meta.potency != 0;
-    #N2: Node.level = Node.meta.level - 1;
-    #N3: Node.potency = Node.meta.potency - 1;
+    #I1: ModelElement.meta.potency != 0;
+    #I2: ModelElement.level = ModelElement.meta.level - 1;
+    #I3: ModelElement.potency = ModelElement.meta.potency - 1;
 
-    // field instantiation
     #F1: Field.meta.potency != 0;
-    #F2: Field.level = Field.meta.level - 1
-        where Field in Node.fields;
-    #F3: Field.potency = Field.meta.potency - 1
-        where Field in Node.fields;
-
-    // edge instantiation
-    #E1: Edge.meta.potency != 0;
-    #E2: Edge.level = Edge.meta.level - 1;
-    #E3: Edge.potency = Edge.meta.potency - 1;
+    #F2: Field.level = Field.meta.level-1;
+    #F3: Field.potency = Field.meta.potency-1;
 }

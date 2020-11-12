@@ -1,5 +1,7 @@
 struct {
-    Node: entity {
+    ModelElement: entity {}
+
+    Node: ModelElement {
         fields: Field[];
         isAbstract: bool;
     }
@@ -9,36 +11,56 @@ struct {
         type: slot.type;
      }
 
-    Edge: entity {
+    Edge: ModelElement {
 		source: Node;
 		target: Node;
 
-		leftMin: int;
-		leftMax: int;
-		rightMin: int;
-		rightMax: int;
+		sourceMin: int;
+		sourceMax: int;
+		targetMin: int;
+		targetMax: int;
 	}
 
 	Inheritance: Edge {	}
 }
 
-metrics {
-    mutable level in {0..*} on Node, Edge, Field;
+annotations {
+    mutable level in {0..*} on ModelElement, Field;
 }
 
 rules {
-    #B1: Edge.leftMax >= Edge.leftMin;
-    #B2: Edge.rightMax >= Edge.rightMin;
+    #B1: Edge.sourceMax >= Edge.sourceMin;
+    #B2: Edge.targetMax >= Edge.targetMin;
 
-    #B3: Inheritance.leftMin = 1;
-    #B4: Inheritance.leftMax = 1;
-    #B5: Inheritance.rightMin = 1;
-    #B6: Inheritance.rightMax = 1;
-    #B7: Inheritance.source.fields subSetOf Inheritance.target.fields;
+    #B3: Inheritance.sourceMin = 1;
+    #B4: Inheritance.sourceMax = 1;
+    #B5: Inheritance.targetMin = 1;
+    #B6: Inheritance.targetMax = 1;
 
-    // #B8: Edge.source.level = Edge.target.level = Edge.level;
-    #B8_1: Edge.source.level = Edge.target.level;
-    #B8_2: Edge.source.level = Edge.level;
+    #B7: forAll inh as Inheritance:
+      forAll f2 as Field:
+       exists f1 as Field:
+        f2.name = f1.name and f2.type = f1.type and
+        f2.value = f1.value
+    where f1 in inh.source.fields and f2.potency > 0 and
+    f2 in inh.target.fields;
+
+    #B8: Edge.source.level = Edge.target.level and
+        Edge.source.level = Edge.level;
     #B9: Edge.source.meta = Edge.meta.source;
     #B10: Edge.target.meta = Edge.meta.target;
+
+    #B11: forAll node as Node:
+      forAll edge as Edge:
+       sum(edge2.sourceMin) >= edge.meta.sourceMin and
+       sum(edge2.sourceMax) <= edge.meta.sourceMax
+      where edge.meta=edge2.meta and edge2.source=node;
+    where edge.source=node;
+
+    #B12: forAll node as Node:
+      forAll edge as Edge:
+       sum(edge2.targetMin) >= edge.meta.targetMin and
+       sum(edge2.targetMax) <= edge.meta.targetMax
+      where edge.meta=edge2.meta and edge2.target=node;
+    where edge.target=node;
 }

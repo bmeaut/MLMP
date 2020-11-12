@@ -1,4 +1,4 @@
-metrics {
+annotations {
 	immutable nonPotency? in {1..1} on Node, Edge, Field;
 }
 
