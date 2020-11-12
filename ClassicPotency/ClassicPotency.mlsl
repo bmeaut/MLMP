@@ -1,5 +1,5 @@
 annotations {
-    mutable potency? in {0..*} on ModelElement, Field;
+    mutable potency in {0..*} on ModelElement, Field;
 	immutable nature in {simple, dual} on Field;
 }
 
@@ -14,7 +14,7 @@ rules {
       if (Field.potency > 0) { Field.value = null; }
      }
 
-    #CP5: Inheritance.potency != null and Inheritance.potency = 0;
+    #CP5: Inheritance.potency = 0;
 
     #I1: ModelElement.meta.potency != 0;
     #I2: ModelElement.level = ModelElement.meta.level - 1;
