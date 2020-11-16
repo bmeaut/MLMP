@@ -1,5 +1,5 @@
 annotations {
-	immutable nonPotency? in {1..1} on Node, Edge, Field;
+	immutable nonPotency? in {1..1} on ModelElement, Field;
 }
 
 rules {

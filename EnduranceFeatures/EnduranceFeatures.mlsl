@@ -1,5 +1,5 @@
 annotations {
-    override mutable potency? in {0..*} on Node, Edge;
+    override mutable potency? in {0..*} on ModelElement;
     mutable durability in {0..*} on Field;
 	mutable mutability in {0..*} on Field.value;
 }
@@ -14,8 +14,7 @@ rules {
      }
 
     #F1: Field.meta.durability != 0;
-    #F3: Field.durability = Field.meta.durability - 1
-          where Field in Node.fields;
+    #F3: Field.durability = Field.meta.durability - 1;
 
     #DU1: durability <= level;
 

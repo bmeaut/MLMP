@@ -1,7 +1,5 @@
 rules {
-    omit N3, E3, F3;
+    omit I3;
 
-    #N3: Node.potency < Node.meta.potency;
-    #E3: Edge.potency < Edge.meta.potency;
-	#F3: Field.potency < Field.meta.potency where Field in Node.fields;
+    #I3: ModelElement.potency < ModelElement.meta.potency;
 }

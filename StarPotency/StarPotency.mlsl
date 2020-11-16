@@ -1,16 +1,12 @@
 annotations {
-    override mutable potency in {-1..*} on Node, Edge, Field;
+    override mutable potency in {-1..*} on ModelElement, Field;
 }
 
 rules {
-	omit N3, E3, F3;
+	omit I3, F3;
 
-    #N3: if (Node.meta.potency != -1) {
-        Node.potency = Node.meta.potency - 1;
-    }
-	
-	#E3: if (Edge.meta.potency != -1) {
-        Edge.potency = Edge.meta.potency - 1;
+    #I3: if (ModelElement.meta.potency != -1) {
+        ModelElement.potency = ModelElement.meta.potency - 1;
     }
 
     #F3: if (Field.meta.potency != -1) {
