@@ -21,6 +21,6 @@ rules {
     #I3: ModelElement.potency = ModelElement.meta.potency - 1;
 
     #F1: Field.meta.potency != 0;
-    #F2: Field.level = Field.meta.level-1;
-    #F3: Field.potency = Field.meta.potency-1;
+    #F2: Field.level = Field.meta.level - 1;
+    #F3: Field.potency = Field.meta.potency - 1;
 }

@@ -1,5 +1,5 @@
 // Level 3
-Configuration: Node {
+BicycleModelType: Node {
     @potency = 3;
     @level = 3;
     isAbstract = false;
@@ -12,7 +12,7 @@ Configuration: Node {
             type = int;
         }
 
-        name: Field {
+        description: Field {
             @potency = 3;
             @level = 3;
             @nature = dual;
@@ -21,7 +21,7 @@ Configuration: Node {
     }
 }
 
-Part: Node {
+PartModelType: Node {
     @potency = 0;
     @level = 3;
     isAbstract = true;
@@ -43,7 +43,7 @@ Part: Node {
     }
 }
 
-BasicPart: Node {
+BasicPartModelType: Node {
     @potency = 3;
     @level = 3;
     isAbstract = false;
@@ -65,7 +65,7 @@ BasicPart: Node {
     }
 }
 
-Component: Node {
+ComponentModelType: Node {
     @potency = 3;
     @level = 3;
     isAbstract = false;
@@ -87,11 +87,11 @@ Component: Node {
     }
 }
 
-hasParts: Edge {
+hasPartModelTypes: Edge {
     @potency = 3;
     @level = 3;
-    source = Configuration;
-    target = Part;
+    source = BicycleModelType;
+    target = PartModelType;
 
     sourceMin = 1;
     sourceMax = 1;
@@ -99,11 +99,11 @@ hasParts: Edge {
     targetMax = *;
 }
 
-composedOfParts: Edge {
+composedOfPartModelTypes: Edge {
     @potency = 3;
     @level = 3;
-    source = Component;
-    target = Part;
+    source = ComponentModelType;
+    target = PartModelType;
 
     sourceMin = 1;
     sourceMax = 1;
@@ -111,11 +111,11 @@ composedOfParts: Edge {
     targetMax = *;
 }
 
-basicPartInheritance: Inheritance {
+basicPartModelTypeInheritance: Inheritance {
     @potency = 0;
     @level = 3;
-    source = BasicPart;
-    target = Part;
+    source = BasicPartModelType;
+    target = PartModelType;
 
     sourceMin = 1;
     sourceMax = 1;
@@ -123,11 +123,11 @@ basicPartInheritance: Inheritance {
     targetMax = 1;
 }
 
-componentInheritance: Inheritance {
+componentModelTypeInheritance: Inheritance {
     @potency = 0;
     @level = 3;
-    source = Component;
-    target = Part;
+    source = ComponentModelType;
+    target = PartModelType;
 
     sourceMin = 1;
     sourceMax = 1;
@@ -137,7 +137,7 @@ componentInheritance: Inheritance {
 
 
 // Level 2
-Bicycle: Configuration {
+BicycleModel: BicycleModelType {
     @potency = 2;
     @level = 2;
     isAbstract = false;
@@ -149,42 +149,22 @@ Bicycle: Configuration {
             @nature = simple;
         }
 
-        name: Field {
+        description: Field {
             @potency = 2;
             @level = 2;
             @nature = dual;
-            value = "Bicycle";
+            value = "This is a bike.";
         }
     }
 }
 
-CustomerModel: Node {
+Customer: Node {
     @potency = 2;
     @level = 2;
     isAbstract = false;
 }
 
-WheelModel: Component {
-    @potency = 2;
-    @level = 2;
-    isAbstract = false;
-
-    fields {
-        weight: Field {
-            @potency = 2;
-            @level = 2;
-            @nature = simple;
-        }
-
-        size: Field {
-            @potency = 2;
-            @level = 2;
-            @nature = simple;
-        }
-    }
-}
-
-Frame: Component {
+WheelModel: ComponentModelType {
     @potency = 2;
     @level = 2;
     isAbstract = false;
@@ -204,7 +184,7 @@ Frame: Component {
     }
 }
 
-Suspension: BasicPart {
+FrameModel: ComponentModelType {
     @potency = 2;
     @level = 2;
     isAbstract = false;
@@ -224,11 +204,31 @@ Suspension: BasicPart {
     }
 }
 
-soldToCustomerModel: Edge {
+SuspensionModel: BasicPartModelType {
     @potency = 2;
     @level = 2;
-    source = CustomerModel;
-    target = Bicycle;
+    isAbstract = false;
+
+    fields {
+        weight: Field {
+            @potency = 2;
+            @level = 2;
+            @nature = simple;
+        }
+
+        size: Field {
+            @potency = 2;
+            @level = 2;
+            @nature = simple;
+        }
+    }
+}
+
+soldToCustomer: Edge {
+    @potency = 2;
+    @level = 2;
+    source = Customer;
+    target = BicycleModel;
 
     sourceMin = 0;
     sourceMax = 1;
@@ -236,10 +236,10 @@ soldToCustomerModel: Edge {
     targetMax = *;
 }
 
-hasWheelModels: hasParts {
+hasWheelModels: hasPartModelTypes {
     @potency = 2;
     @level = 2;
-    source = Bicycle;
+    source = BicycleModel;
     target = WheelModel;
 
     sourceMin = 1;
@@ -248,11 +248,11 @@ hasWheelModels: hasParts {
     targetMax = 2;
 }
 
-hasFrame: hasParts {
+hasFrameModel: hasPartModelTypes {
     @potency = 2;
     @level = 2;
-    source = Bicycle;
-    target = Frame;
+    source = BicycleModel;
+    target = FrameModel;
 
     sourceMin = 1;
     sourceMax = 1;
@@ -260,11 +260,11 @@ hasFrame: hasParts {
     targetMax = 1;
 }
 
-hasSuspension: composedOfParts {
+hasSuspensionModel: composedOfPartModelTypes {
     @potency = 2;
     @level = 2;
-    source = Frame;
-    target = Suspension;
+    source = FrameModel;
+    target = SuspensionModel;
 
     sourceMin = 1;
     sourceMax = 1;
@@ -274,7 +274,7 @@ hasSuspension: composedOfParts {
 
 
 // Level 1
-ChallengerA2-XL: Bicycle {
+ChallengerA2-XL: BicycleModel {
     @potency = 1;
     @level = 1;
     isAbstract = false;
@@ -287,11 +287,11 @@ ChallengerA2-XL: Bicycle {
             value = 2000;
         }
 
-        name: Field {
+        description: Field {
             @potency = 1;
             @level = 1;
             @nature = dual;
-            value = "Challenger A2-XL";
+            value = "This is an A2-XL.";
         }
     }
 }
@@ -316,7 +316,7 @@ Wheel: WheelModel {
     }
 }
 
-Rocket-A1-XL: Frame {
+Rocket-A1-XL: FrameModel {
     @potency = 1;
     @level = 1;
     isAbstract = false;
@@ -336,7 +336,7 @@ Rocket-A1-XL: Frame {
     }
 }
 
-Customer: CustomerModel {
+Challenger-A2-XLCustomer: Customer {
     @potency = 1;
     @level = 1;
     isAbstract = false;
@@ -354,7 +354,7 @@ hasWheels: hasWheelModels {
     targetMax = 2;
 }
 
-hasRocket-A1-XL: hasFrame {
+hasRocket-A1-XL: hasFrameModel {
     @potency = 1;
     @level = 1;
     source = ChallengerA2-XL;
@@ -366,10 +366,10 @@ hasRocket-A1-XL: hasFrame {
     targetMax = 1;
 }
 
-soldToCustomer: soldToCustomerModel {
+soldToChallengerA2XLCustomer: soldToCustomer {
     @potency = 1;
     @level = 1;
-    source = Customer;
+    source = Challenger-A2-XLCustomer;
     target = ChallengerA2-XL;
 
     sourceMin = 0;
@@ -386,16 +386,16 @@ Bike134123: ChallengerA2-XL {
     isAbstract = false;
 
     fields {
-        name: Field {
+        description: Field {
             @potency = 0;
             @level = 0;
             @nature = dual;
-            value = "Falcon";
+            value = "Sold to Susan.";
         }
     }
 }
 
-SusanStorm: Customer {
+SusanStorm: Challenger-A2-XLCustomer {
     @potency = 0;
     @level = 0;
     isAbstract = false;

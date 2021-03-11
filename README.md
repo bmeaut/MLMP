@@ -5,6 +5,10 @@ This repository contains examples of our Multi-Level Modeling Playground (MLMP),
 
 Where applicable, dependencies and related references can be found separately in every sub folder.
 
+The repository also contains the brief syntax definition of MLSL described in EBNF.
+
+The examples and this document are subject to change based on researcher feedback and on our own research.
+
 Contact:
 gmezei@aut.bme.hu
 somogyi.ferenc@aut.bme.hu

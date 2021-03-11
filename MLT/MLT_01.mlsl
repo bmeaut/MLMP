@@ -1,0 +1,34 @@
+struct {
+    EntityDeclaration: entity { }
+
+	Class: EntityDeclaration {
+		features: Feature[];
+	}
+
+    Feature: slot {
+        value: slot.value;
+        type: slot.type;
+    }
+
+	Individual: EntityDeclaration { }
+
+	OrderlessClass: Class { }
+
+	OrderedClass: Class { }
+
+    Edge: entity {
+		source: Class;
+		target: Class;
+
+		sourceMin: int;
+		sourceMax: int;
+		targetMin: int;
+		targetMax: int;
+	}
+
+	Inheritance: Edge {	}
+}
+
+annotations {
+    mutable order in {0..*} on OrderedClass;
+}

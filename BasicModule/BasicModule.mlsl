@@ -37,8 +37,8 @@ rules {
     #B5: Inheritance.targetMin = 1;
     #B6: Inheritance.targetMax = 1;
 
-    #B7: forAll inh as Inheritance:
-      forAll f2 as Field:
+    #B7: forall inh as Inheritance:
+      forall f2 as Field:
        exists f1 as Field:
         f2.name = f1.name and f2.type = f1.type and
         f2.value = f1.value
@@ -47,20 +47,36 @@ rules {
 
     #B8: Edge.source.level = Edge.target.level and
         Edge.source.level = Edge.level;
-    #B9: Edge.source.meta = Edge.meta.source;
-    #B10: Edge.target.meta = Edge.meta.target;
+		
+    #B9: Edge.source.meta in closure(Edge.meta.source) {
+        Inheritance.source where Inheritance.target = Edge.meta.source;
+    }
 
-    #B11: forAll node as Node:
-      forAll edge as Edge:
+    #B10: Edge.target.meta in closure(Edge.meta.target) {
+        Inheritance.source where Inheritance.target = Edge.meta.target;
+    }
+
+    #B11: forall node as Node:
+      forall edge as Edge:
        sum(edge2.sourceMin) >= edge.meta.sourceMin and
        sum(edge2.sourceMax) <= edge.meta.sourceMax
       where edge.meta=edge2.meta and edge2.source=node;
     where edge.source=node;
 
-    #B12: forAll node as Node:
-      forAll edge as Edge:
+    #B12: forall node as Node:
+      forall edge as Edge:
        sum(edge2.targetMin) >= edge.meta.targetMin and
        sum(edge2.targetMax) <= edge.meta.targetMax
       where edge.meta=edge2.meta and edge2.target=node;
     where edge.target=node;
+
+    #B13: forall i1 as Inheritance:
+        exists i2 as Inheritance:
+            i1 != i2 and i1.source = i2.source;
+
+    #B14: Inheritance.source != Inheritance.target;
+
+    #B15: ! exists inh as Inheritance: inh.source in closure(inh.target) {
+        Inheritance.target where Inheritance.source = inh.target;
+    };
 }

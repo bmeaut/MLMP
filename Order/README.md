@@ -4,11 +4,11 @@
 #### Requirements
 - **O1** "The order of a modeling element can be regarded as a measure of its set-theoretic classification power, since it corresponds to the maximum depth of the "type-of" relationships originating from an element." In our interpretation, order can only be assigned to nodes.
 
-- **O2** The order of a node must be less than or equal to its level. Note that this depends on the particular solution as it could be "order=level" as well. 
+- **O2** The order of a node must be less than or equal to its level. Note that this depends on the particular solution as it could be "order=level" as well.
 
 - **O3** The order of a node must be greater than or equal to its potency.
 
-- **O4** Instantiating a node reduces its order by 1.
+- **O4** The instance of a node has an order value that is exactly one less than that of the node.
 
 - **O5** Nodes with order 0 cannot be instantiated.
 

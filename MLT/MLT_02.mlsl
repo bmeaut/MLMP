@@ -1,0 +1,29 @@
+categorizedClass : Edge {
+    source = Class;
+    target = Class;
+
+    sourceMin = 1;
+    sourceMax = 1;
+    targetMin = 0;
+    targetMax = 1;
+}
+
+powertypeOf : Edge {
+    source = Class;
+    target = Class;
+
+    sourceMin = 1;
+    sourceMax = 1;
+    targetMin = 0;
+    targetMax = 1;
+}
+
+superClass : Edge {
+    source = Class;
+    target = Class;
+
+    sourceMin = 1;
+    sourceMax = 1;
+    targetMin = 0;
+    targetMax = *;
+}

@@ -8,7 +8,7 @@
 
 - **LP3** Similarly to classic potency, the leap potency of a model element must be less than or equal to its level.
 
-- **LP4** On an instantiation, the leap potency of the instance must be 0.
+- **LP4** When instantiating a node or edge, the leap potency of the instance must be 0.
 
 #### References:
 - de Lara, J., Guerra, E., Cobos, R., Moreno-Llorena, J.: Extending Deep Meta-Modelling for Practical Model-Driven Engineering. The Computer Journal 57(1), 36–58 (2012). [URL](https://www.doi.org/10.1093/comjnl/bxs144) 

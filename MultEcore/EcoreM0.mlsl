@@ -1,4 +1,4 @@
-// M0 - fixed
+// M0 is a fixed level
 EClass: node {
     @potencyMin = 0;
     @potencyMax = *;

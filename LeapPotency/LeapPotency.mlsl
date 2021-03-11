@@ -8,10 +8,9 @@ rules {
 
     #LP1: (potency = null and leapPotency != null) or
         (potency != null and leapPotency = null);
-    #LP2: Field.potency != null;
 
-    #LP3: leapPotency <= level;
-    #LP4: Inheritance.leapPotency = null;
+    #LP2: leapPotency <= level;
+    #LP3: Inheritance.leapPotency = null;
 
     // Replaces I1-3
     #N_classic: if (Node.meta.potency != null) {
@@ -19,7 +18,7 @@ rules {
         Node.level = Node.meta.level - 1;
         Node.potency = Node.meta.potency - 1;
 
-        // Was F2-3
+        // Replaces F2-3
         Field.level = Field.meta.level - 1
             where Field in Node.fields;
         Field.potency = Field.meta.potency - 1

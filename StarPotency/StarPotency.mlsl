@@ -10,8 +10,7 @@ rules {
     }
 
     #F3: if (Field.meta.potency != -1) {
-        Field.potency = Field.meta.potency - 1
-                where Field in Node.fields;
+        Field.potency = Field.meta.potency - 1;
      }
 
     #SP1: if (Node.potency != -1) {

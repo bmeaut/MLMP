@@ -6,9 +6,7 @@ rules {
     #O1: potency <= order;
 	#O2: order <= level;
 	
-	#O3: if (Node.isAbstract) {
-		Node.order > 0;
-	}
+	#O3: if (Node.isAbstract) { Node.order > 0; }
 
 	#O4: Node.meta.order !=0;
     #O5: Node.order = Node.meta.order - 1;

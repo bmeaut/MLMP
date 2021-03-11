@@ -1,3 +1,6 @@
+#### NOTES:
+- This domain model is inspired by the Bicycle challenge issued by the MULTI community. It is not meant to be a full or precise solution to the challenge. The purpose of this domain model is to illustrate the mechanics of classic potency in practice.
+
 #### Dependencies:
 - DomainBicycle &#8594; ClassicPotency
 
