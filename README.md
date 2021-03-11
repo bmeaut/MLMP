@@ -9,8 +9,8 @@ The repository also contains the brief syntax definition of MLSL described in EB
 
 The examples and this document are subject to change based on researcher feedback and on our own research.
 
-Contact:
-gmezei@aut.bme.hu
-somogyi.ferenc@aut.bme.hu
-bacsi.sandor@aut.bme.hu
+Contact:</br>
+gmezei@aut.bme.hu</br>
+somogyi.ferenc@aut.bme.hu</br>
+bacsi.sandor@aut.bme.hu</br>
 tholiq@gmail.com
