@@ -50,24 +50,24 @@ rules {
 		
     #B9: Edge.source.meta in closure(Edge.meta.source) {
         Inheritance.source where Inheritance.target = Edge.meta.source;
-    }
+    };
 
     #B10: Edge.target.meta in closure(Edge.meta.target) {
         Inheritance.source where Inheritance.target = Edge.meta.target;
-    }
+    };
 
     #B11: forall node as Node:
       forall edge as Edge:
        sum(edge2.sourceMin) >= edge.meta.sourceMin and
        sum(edge2.sourceMax) <= edge.meta.sourceMax
-      where edge.meta=edge2.meta and edge2.source=node;
+      where edge.meta=edge2.meta and edge2.source=node
     where edge.source=node;
 
     #B12: forall node as Node:
       forall edge as Edge:
        sum(edge2.targetMin) >= edge.meta.targetMin and
        sum(edge2.targetMax) <= edge.meta.targetMax
-      where edge.meta=edge2.meta and edge2.target=node;
+      where edge.meta=edge2.meta and edge2.target=node
     where edge.target=node;
 
     #B13: forall i1 as Inheritance:
