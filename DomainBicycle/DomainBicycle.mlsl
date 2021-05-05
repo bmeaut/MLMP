@@ -87,7 +87,7 @@ ComponentModelType: Node {
     }
 }
 
-hasPartModelTypes: Edge {
+hasParts: Edge {
     @potency = 3;
     @level = 3;
     source = BicycleModelType;
@@ -99,7 +99,7 @@ hasPartModelTypes: Edge {
     targetMax = *;
 }
 
-composedOfPartModelTypes: Edge {
+composedOfParts: Edge {
     @potency = 3;
     @level = 3;
     source = ComponentModelType;
@@ -158,7 +158,7 @@ BicycleModel: BicycleModelType {
     }
 }
 
-Customer: Node {
+CustomerType: Node {
     @potency = 2;
     @level = 2;
     isAbstract = false;
@@ -224,7 +224,7 @@ SuspensionModel: BasicPartModelType {
     }
 }
 
-soldToCustomer: Edge {
+soldToCustomer_L2: Edge {
     @potency = 2;
     @level = 2;
     source = Customer;
@@ -236,7 +236,7 @@ soldToCustomer: Edge {
     targetMax = *;
 }
 
-hasWheelModels: hasPartModelTypes {
+hasWheels_L2: hasParts {
     @potency = 2;
     @level = 2;
     source = BicycleModel;
@@ -248,7 +248,7 @@ hasWheelModels: hasPartModelTypes {
     targetMax = 2;
 }
 
-hasFrameModel: hasPartModelTypes {
+hasFrame: hasParts {
     @potency = 2;
     @level = 2;
     source = BicycleModel;
@@ -260,7 +260,7 @@ hasFrameModel: hasPartModelTypes {
     targetMax = 1;
 }
 
-hasSuspensionModel: composedOfPartModelTypes {
+hasSuspension: composedOfParts {
     @potency = 2;
     @level = 2;
     source = FrameModel;
@@ -336,13 +336,13 @@ Rocket-A1-XL: FrameModel {
     }
 }
 
-Challenger-A2-XLCustomer: Customer {
+Customer: CustomerType {
     @potency = 1;
     @level = 1;
     isAbstract = false;
 }
 
-hasWheels: hasWheelModels {
+hasWheels_L1: hasWheels_L2 {
     @potency = 1;
     @level = 1;
     source = ChallengerA2-XL;
@@ -354,7 +354,7 @@ hasWheels: hasWheelModels {
     targetMax = 2;
 }
 
-hasRocket-A1-XL: hasFrameModel {
+hasRocket-A1-XL: hasFrame {
     @potency = 1;
     @level = 1;
     source = ChallengerA2-XL;
@@ -366,10 +366,10 @@ hasRocket-A1-XL: hasFrameModel {
     targetMax = 1;
 }
 
-soldToChallengerA2XLCustomer: soldToCustomer {
+soldToCustomer_L1: soldToCustomer_L2 {
     @potency = 1;
     @level = 1;
-    source = Challenger-A2-XLCustomer;
+    source = Customer;
     target = ChallengerA2-XL;
 
     sourceMin = 0;
@@ -395,7 +395,7 @@ Bike134123: ChallengerA2-XL {
     }
 }
 
-SusanStorm: Challenger-A2-XLCustomer {
+SusanStorm: Customer {
     @potency = 0;
     @level = 0;
     isAbstract = false;
@@ -423,7 +423,7 @@ Frame134123: Rocket-A1-XL {
     }
 }
 
-FrontWheel: Wheel {
+FrontWheel134123: Wheel {
     @potency = 0;
     @level = 0;
     isAbstract = false;
@@ -445,7 +445,7 @@ FrontWheel: Wheel {
     }
 }
 
-RearWheel: Wheel {
+RearWheel134123: Wheel {
     @potency = 0;
     @level = 0;
     isAbstract = false;
@@ -467,11 +467,11 @@ RearWheel: Wheel {
     }
 }
 
-hasFrontWheel: hasWheels {
+hasFrontWheel: hasWheels_L1 {
     @potency = 0;
     @level = 0;
     source = Bike134123;
-    target = FrontWheel;
+    target = FrontWheel134123;
 
     sourceMin = 1;
     sourceMax = 1;
@@ -479,11 +479,11 @@ hasFrontWheel: hasWheels {
     targetMax = 1;
 }
 
-hasRearWheel: hasWheels {
+hasRearWheel: hasWheels_L1 {
     @potency = 0;
     @level = 0;
     source = Bike134123;
-    target = RearWheel;
+    target = RearWheel134123;
 
     sourceMin = 1;
     sourceMax = 1;
@@ -503,7 +503,7 @@ hasFrame134123: hasRocket-A1-XL {
     targetMax = 1;
 }
 
-soldToSusanStorm: soldToCustomer {
+soldToSusanStorm: soldToCustomer_L1 {
     @potency = 0;
     @level = 0;
     source = SusanStorm;
