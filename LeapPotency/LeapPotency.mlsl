@@ -39,7 +39,8 @@ rules {
 
         Field.level = Field.meta.level - Node.meta.leapPotency
             where Field in Node.fields;
-        Field.potency = Field.potency - Node.meta.leapPotency;
+        Field.potency = Field.meta.potency - Node.meta.leapPotency
+			where Field in Node.fields;
     }
 
     #E_leap: if (Edge.meta.leapPotency != null) {
