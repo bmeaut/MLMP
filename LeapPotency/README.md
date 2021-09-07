@@ -8,7 +8,7 @@
 
 - **LP3** Similarly to classic potency, the leap potency of a model element must be less than or equal to its level.
 
-- **LP4** When instantiating a node or edge, the leap potency of the instance must be 0. Contained field instances have their potency reduced by the leap potency of the containing meta node.
+- **LP4** When instantiating a node or edge, the leap potency of the instance must be 0. Contained field instances have their potency reduced by one since one instantiation occurred from their pont of view. The latter part is purely our interpretation of the semantics of leap potency.
 
 #### References:
 - de Lara, J., Guerra, E., Cobos, R., Moreno-Llorena, J.: Extending Deep Meta-Modelling for Practical Model-Driven Engineering. The Computer Journal 57(1), 36–58 (2012). [URL](https://www.doi.org/10.1093/comjnl/bxs144) 
