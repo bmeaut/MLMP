@@ -9,7 +9,7 @@ rules {
 	#O3: if (Node.isAbstract) { Node.order > 0; }
 
 	#O4: Node.meta.order !=0;
-    #O5: Node.order = Node.meta.order - 1;
+	#O5: Node.order = Node.meta.order - 1;
 	#O6: if (!Node.isAbstract) { if (Node.order = 0) {Node.potency = 0;} }
 	#O7: Inheritance.source.order = Inheritance.target.order;
 }
