@@ -39,7 +39,7 @@ rules {
 
         Field.level = Field.meta.level - Node.meta.leapPotency
             where Field in Node.fields;
-        Field.potency = Field.meta.potency - 1
+        Field.potency = Field.meta.potency - Node.meta.leapPotency
 			where Field in Node.fields;
     }
 

@@ -1,7 +1,7 @@
 annotations {
     override mutable potency? in {0..*} on ModelElement;
     mutable durability in {0..*} on Field;
-	mutable mutability in {0..*} on Field.value;
+	mutable mutability in {0..*} on Field;
 }
 
 rules {
@@ -11,7 +11,7 @@ rules {
             if (Field.durability > 0) {
                 Field.value = null;
             }
-     }
+    }
 
     #F1: Field.meta.durability != 0;
     #F3: Field.durability = Field.meta.durability - 1;
@@ -19,9 +19,11 @@ rules {
     #DU1: durability <= level;
 
     #MU1: mutability <= durability;
-    #MU2: Field.meta.value.mutability !=0;
-    #MU3: Field.value.mutability = Field.meta.value.mutability - 1;
-    #MU4: if (Node.isAbstract) {
-            Field.value.mutability > 0 where Field in Node.fields;
+
+    #MU2: if (Field.meta.mutability = 0) { Field.mutability = 0; }
+    else { Field.mutability = Field.meta.mutability - 1; }
+
+    #MU3: if (Node.isAbstract) {
+        Field.mutability > 0 where Field in Node.fields;
     }
 }

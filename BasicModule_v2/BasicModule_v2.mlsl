@@ -1,9 +1,10 @@
 struct {
-    ModelElement: entity {}
+    ModelElement: entity {
+        isAbstract: bool;
+    }
 
     Node: ModelElement {
         fields: Field[];
-        isAbstract: bool;
     }
 
     Field: slot {
@@ -19,9 +20,26 @@ struct {
 		sourceMax: int;
 		targetMin: int;
 		targetMax: int;
+
+        roleName: string;
+		roleNameSource: string;
+		roleNameTarget: string;
 	}
 
-	Inheritance: Edge {	}
+    Inheritance: ModelElement {
+        source: ModelElement;
+        target: ModelElement;
+    }
+
+	Inheritance_Node: Inheritance {
+	    source: Node;
+        target: Node;
+	}
+
+	Inheritance_Edge: Inheritance {
+	    source: Edge;
+        target: Edge;
+	}
 }
 
 annotations {
@@ -29,17 +47,18 @@ annotations {
 }
 
 rules {
-	#B0: !Node.meta.isAbstract; 
+    #B0: !ModelElement.meta.isAbstract;
 
     #B1: Edge.sourceMax >= Edge.sourceMin;
     #B2: Edge.targetMax >= Edge.targetMin;
 
-    #B3: Inheritance.sourceMin = 1;
-    #B4: Inheritance.sourceMax = 1;
-    #B5: Inheritance.targetMin = 1;
-    #B6: Inheritance.targetMax = 1;
+    // removed B3-B6 (compared to BasicModule)
+    // #B3: Inheritance.sourceMin = 1;
+    // #B4: Inheritance.sourceMax = 1;
+    // #B5: Inheritance.targetMin = 1;
+    // #B6: Inheritance.targetMax = 1;
 
-    #B7: forall inh as Inheritance:
+    #B7: forall inh as Inheritance_Node:
       forall f2 as Field:
        exists f1 as Field:
         f2.name = f1.name and f2.type = f1.type and
@@ -49,13 +68,13 @@ rules {
 
     #B8: Edge.source.level = Edge.target.level and
         Edge.source.level = Edge.level;
-		
+
     #B9: Edge.source.meta in closure(Edge.meta.source) {
-        Inheritance.source where Inheritance.target = Edge.meta.source;
+        Inheritance_Node.source where Inheritance_Node.target = Edge.meta.source;
     };
 
     #B10: Edge.target.meta in closure(Edge.meta.target) {
-        Inheritance.source where Inheritance.target = Edge.meta.target;
+        Inheritance_Node.source where Inheritance_Node.target = Edge.meta.target;
     };
 
     #B11: forall node as Node:

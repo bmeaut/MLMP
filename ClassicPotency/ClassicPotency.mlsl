@@ -23,5 +23,5 @@ rules {
     #F1: Field.meta.potency != 0;
     #F2: Field.level = Field.meta.level - 1;
     #F3: Field.potency = Field.meta.potency - 1;
-    #F4: Field.level = Field.meta.level;
+    #F4: Field.type = Field.meta.type;
 }
