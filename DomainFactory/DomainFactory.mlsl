@@ -1,0 +1,517 @@
+// ***********************************
+// ************* Level 2 *************
+// ***********************************
+
+// ************* Nodes *************
+FactoryAsModelSupporter: Node {
+    @potency = 1;
+    @level = 2;
+    isAbstract = false;
+}
+
+CompanyAsOwner: Node {
+    @potency = 1;
+    @level = 2;
+    isAbstract = false;
+}
+
+DeviceModel: Node {
+    @potency = 2;
+    @level = 2;
+    isAbstract = false;
+}
+
+
+// ************* Edges *************
+owns_CAO_FAMS: Edge {
+    @potency = 1;
+    @level = 2;
+
+    source = CompanyAsOwner;
+    target = FactoryAsModelSupporter;
+
+    sourceMin = 0;
+    sourceMax = *;
+    targetMin = 1;
+    targetMax = 1;
+
+    roleName = "owns";
+    roleNameSource = "owner";
+    roleNameTarget = "factory";
+}
+
+owns_CAO_DM: Edge {
+    @potency = 1;
+    @level = 2;
+
+    source = CompanyAsOwner;
+    target = DeviceModel;
+
+    sourceMin = 1;
+    sourceMax = 1;
+    targetMin = 1;
+    targetMax = 1;
+
+    roleName = "owns";
+    roleNameSource = "owner";
+    roleNameTarget = "deviceModel";
+}
+
+supports_FAMS_DM: Edge {
+    @potency = 1;
+    @level = 2;
+
+    source = FactoryAsModelSupporter;
+    target = DeviceModel;
+
+    sourceMin = 1;
+    sourceMax = 1;
+    targetMin = 1;
+    targetMax = 1;
+
+    roleName = "supports";
+    roleNameSource = "factory";
+    roleNameTarget = "supportedModel";
+}
+
+
+
+// ***********************************
+// ************* Level 1 *************
+// ***********************************
+
+// ************* Nodes *************
+Factory: Node {
+    @potency = 0;
+    @level = 1;
+    isAbstract = true;
+}
+
+MP_Factory: Node {
+    @potency = 0;
+    @level = 1;
+    isAbstract = true;
+}
+
+HuaweiMP_Factory: Node {
+    @potency = 1;
+    @level = 1;
+    isAbstract = false;
+}
+
+Factory124: FactoryAsModelSupporter {
+    @potency = 0;
+    @level = 1;
+    isAbstract = false;
+}
+
+Company: Node {
+    @potency = 1;
+    @level = 1;
+    isAbstract = false;
+
+    fields {
+        name: Field {
+            @durability = 1;
+            @mutability = 1;
+            @level = 1;
+            @nature = simple;
+            type = string;
+        }
+    }
+}
+
+Huawei: CompanyAsOwner {
+    @potency = 0;
+    @level = 1;
+    isAbstract = false;
+}
+
+Device: Node {
+    @potency = 0;
+    @level = 1;
+    isAbstract = true;
+}
+
+MP_Device: DeviceModel {
+    @potency = 0;
+    @level = 1;
+    isAbstract = true;
+
+    fields {
+        IMEI: Field {
+            @durability = 1;
+            @mutability = 1;
+            @level = 1;
+            @nature = simple;
+            type = string;
+        }
+
+        RAM: Field {
+            @durability = 1;
+            @mutability = 1;
+            @level = 1;
+            @nature = simple;
+            type = int;
+        }
+    }
+}
+
+HuaweiMP: DeviceModel {
+    @potency = 0;
+    @level = 1;
+    isAbstract = true;
+}
+
+S400: DeviceModel {
+    @potency = 1;
+    @level = 1;
+    isAbstract = false;
+}
+
+S500: DeviceModel {
+    @potency = 1;
+    @level = 1;
+    isAbstract = false;
+}
+
+// ************* Edges *************
+owns_Company: Edge {
+    @potency = 1;
+    @level = 1;
+
+    source = Company;
+    target = Factory;
+
+    sourceMin = 1;
+    sourceMax = 1;
+    targetMin = 0;
+    targetMax = *;
+
+    roleName = "owns";
+    roleNameSource = "owner";
+    roleNameTarget = "factory";
+}
+
+produces_Factory: Edge {
+    @potency = 0;
+    @level = 1;
+
+    source = Factory;
+    target = Device;
+
+    sourceMin = 1;
+    sourceMax = 1;
+    targetMin = 1;
+    targetMax = 1;
+
+    roleName = "produces";
+    roleNameSource = "producer";
+    roleNameTarget = "device";
+}
+
+produces_MP_Factory: Edge {
+    @potency = 0;
+    @level = 1;
+
+    source = MP_Factory;
+    target = MP_Device;
+
+    sourceMin = 1;
+    sourceMax = 1;
+    targetMin = 1;
+    targetMax = 1;
+
+    roleName = "produces";
+    roleNameSource = "producer";
+    roleNameTarget = "device";
+}
+
+produces_HuaweiMP_Factory: Edge {
+    @potency = 1;
+    @level = 1;
+
+    source = HuaweiMP_Factory;
+    target = HuaweiMP;
+
+    sourceMin = 1;
+    sourceMax = 1;
+    targetMin = 1;
+    targetMax = 1;
+
+    roleName = "produces";
+    roleNameSource = "producer";
+    roleNameTarget = "device";
+}
+
+owns_Huawei_Factory124: owns_CAO_FAMS {
+    @potency = 0;
+    @level = 1;
+
+    source = Huawei;
+    target = Factory124;
+
+    sourceMin = 1;
+    sourceMax = 1;
+    targetMin = 1;
+    targetMax = 1;
+
+    roleName = "owns";
+    roleNameSource = "owner";
+    roleNameTarget = "factory";
+}
+
+owns_Huawei_S400: owns_CAO_DM {
+    @potency = 0;
+    @level = 1;
+
+    source = Huawei;
+    target = S400;
+
+    sourceMin = 1;
+    sourceMax = 1;
+    targetMin = 1;
+    targetMax = 1;
+
+    roleName = "owns";
+    roleNameSource = "owner";
+    roleNameTarget = "deviceModel";
+}
+
+owns_Huawei_S500: owns_CAO_DM {
+    @potency = 0;
+    @level = 1;
+
+    source = Huawei;
+    target = S500;
+
+    sourceMin = 1;
+    sourceMax = 1;
+    targetMin = 1;
+    targetMax = 1;
+
+    roleName = "owns";
+    roleNameSource = "owner";
+    roleNameTarget = "deviceModel";
+}
+
+supports_Factory124_S400: supports_FAMS_DM {
+    @potency = 0;
+    @level = 1;
+
+    source = Factory124;
+    target = S400;
+
+    sourceMin = 1;
+    sourceMax = 1;
+    targetMin = 1;
+    targetMax = 1;
+
+    roleName = "supports";
+    roleNameSource = "factory";
+    roleNameTarget = "supportedModel";
+}
+
+supports_Factory124_S500: supports_FAMS_DM {
+    @potency = 0;
+    @level = 1;
+
+    source = Factory124;
+    target = S500;
+
+    sourceMin = 1;
+    sourceMax = 1;
+    targetMin = 1;
+    targetMax = 1;
+
+    roleName = "supports";
+    roleNameSource = "factory";
+    roleNameTarget = "supportedModel";
+}
+
+
+// ************* Inheritance *************
+
+inh_produces_1: Inheritance_Edge {
+    @potency = 0;
+    @level = 1;
+    source = produces_MP_Factory;
+    target = produces_Factory;
+}
+
+inh_produces_2: Inheritance_Edge {
+    @potency = 0;
+    @level = 1;
+    source = produces_Factory;
+    target = produces_HuaweiMP_Factory;
+}
+
+inh_MP_Factory: Inheritance_Node {
+    @potency = 0;
+    @level = 1;
+    source = MP_Factory;
+    target = Factory;
+}
+
+inh_HuaweiMP_Factory: Inheritance_Node {
+    @potency = 0;
+    @level = 1;
+    source = HuaweiMP_Factory;
+    target = MP_Factory;
+}
+
+inh_MP_Device: Inheritance_Node {
+    @potency = 0;
+    @level = 1;
+    source = MP_Device;
+    target = Device;
+}
+
+inh_HuaweiMP: Inheritance_Node {
+    @potency = 0;
+    @level = 1;
+    source = HuaweiMP;
+    target = MP_Device;
+}
+
+inh_S400: Inheritance_Node {
+    @potency = 0;
+    @level = 1;
+    source = S400;
+    target = HuaweiMP;
+}
+
+inh_S500: Inheritance_Node {
+    @potency = 0;
+    @level = 1;
+    source = S500;
+    target = HuaweiMP;
+}
+
+
+// ***********************************
+// ************* Level 0 *************
+// ***********************************
+
+// ************* Nodes *************
+Factory124_L0: HuaweiMP_Factory {
+    @potency = 0;
+    @level = 0;
+    isAbstract = false;
+}
+
+Huawei_L0: Company {
+    @potency = 0;
+    @level = 0;
+    isAbstract = false;
+
+    fields {
+        name: Field {
+            @durability = 0;
+            @mutability = 0;
+            @level = 0;
+            @nature = simple;
+            value = "Huawei";
+        }
+    }
+}
+
+S400_01: S400 {
+    @potency = 0;
+    @level = 0;
+    isAbstract = false;
+
+    fields {
+        IMEI: Field {
+            @durability = 0;
+            @mutability = 0;
+            @level = 0;
+            @nature = simple;
+            value = "001468723648726";
+        }
+
+        RAM: Field {
+            @durability = 0;
+            @mutability = 0;
+            @level = 0;
+            @nature = simple;
+            value = 4;
+        }
+    }
+}
+
+S400_02: S400 {
+    @potency = 0;
+    @level = 0;
+    isAbstract = false;
+
+    fields {
+        IMEI: Field {
+            @durability = 0;
+            @mutability = 0;
+            @level = 0;
+            @nature = simple;
+            value = "0018768768475638";
+        }
+
+        RAM: Field {
+            @durability = 0;
+            @mutability = 0;
+            @level = 0;
+            @nature = simple;
+            value = 8;
+        }
+    }
+}
+
+// ************* Edges *************
+owns_Huawei_Factory124_L0: owns_Company {
+    @potency = 0;
+    @level = 0;
+
+    source = Huawei_L0;
+    target = Factory124_L0;
+
+    sourceMin = 1;
+    sourceMax = 1;
+    targetMin = 1;
+    targetMax = 1;
+
+    roleName = "owns";
+    roleNameSource = "owner";
+    roleNameTarget = "factory";
+}
+
+produces_Factory124_S400_01: produces_HuaweiMP_Factory {
+    @potency = 0;
+    @level = 0;
+
+    source = Factory124_L0;
+    target = S400_01;
+
+    sourceMin = 1;
+    sourceMax = 1;
+    targetMin = 1;
+    targetMax = 1;
+
+    roleName = "produces";
+    roleNameSource = "factory";
+    roleNameTarget = "device";
+}
+
+produces_Factory124_S400_02: produces_HuaweiMP_Factory {
+    @potency = 0;
+    @level = 0;
+
+    source = Factory124_L0;
+    target = S400_02;
+
+    sourceMin = 1;
+    sourceMax = 1;
+    targetMin = 1;
+    targetMax = 1;
+
+    roleName = "produces";
+    roleNameSource = "factory";
+    roleNameTarget = "device";
+}
