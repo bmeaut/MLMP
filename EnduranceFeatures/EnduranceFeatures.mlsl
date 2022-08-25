@@ -1,5 +1,5 @@
 annotations {
-    override mutable potency? in {0..*} on ModelElement;
+    override mutable potency in {0..*} on ModelElement;
     mutable durability in {0..*} on Field;
 	mutable mutability in {0..*} on Field;
 }
