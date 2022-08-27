@@ -342,8 +342,8 @@ inh_produces_1: Inheritance_Edge {
 inh_produces_2: Inheritance_Edge {
     @potency = 0;
     @level = 1;
-    source = produces_Factory;
-    target = produces_HuaweiMP_Factory;
+    source = produces_HuaweiMP_Factory;
+    target = produces_MP_Factory;
 }
 
 inh_MP_Factory: Inheritance_Node {
