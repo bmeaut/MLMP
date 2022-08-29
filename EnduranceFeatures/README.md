@@ -1,5 +1,5 @@
 #### Dependencies:
-- EnduranceFeatures &#8594; ClassicPotency
+- EnduranceFeatures &#8594; CharacterizationPotency
 
 
 #### References:
