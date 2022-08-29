@@ -50,7 +50,7 @@ owns_CAO_DM: Edge {
     sourceMin = 1;
     sourceMax = 1;
     targetMin = 1;
-    targetMax = 1;
+    targetMax = *;
 
     roleName = "owns";
     roleNameSource = "owner";
@@ -67,7 +67,7 @@ supports_FAMS_DM: Edge {
     sourceMin = 1;
     sourceMax = 1;
     targetMin = 1;
-    targetMax = 1;
+    targetMax = *;
 
     roleName = "supports";
     roleNameSource = "factory";
@@ -203,7 +203,7 @@ produces_Factory: Edge {
     sourceMin = 1;
     sourceMax = 1;
     targetMin = 1;
-    targetMax = 1;
+    targetMax = *;
 
     roleName = "produces";
     roleNameSource = "producer";
@@ -220,7 +220,7 @@ produces_MP_Factory: Edge {
     sourceMin = 1;
     sourceMax = 1;
     targetMin = 1;
-    targetMax = 1;
+    targetMax = *;
 
     roleName = "produces";
     roleNameSource = "producer";
@@ -237,7 +237,7 @@ produces_HuaweiMP_Factory: Edge {
     sourceMin = 1;
     sourceMax = 1;
     targetMin = 1;
-    targetMax = 1;
+    targetMax = *;
 
     roleName = "produces";
     roleNameSource = "producer";
