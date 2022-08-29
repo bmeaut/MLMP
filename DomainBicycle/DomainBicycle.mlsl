@@ -8,7 +8,7 @@ BicycleModelType: Node {
         salesPrice: Field {
             @potency = 2;
             @level = 3;
-            @nature = simple;
+            @nature = single;
             type = int;
         }
 
@@ -30,14 +30,14 @@ PartModelType: Node {
         weight: Field {
             @potency = 3;
             @level = 3;
-            @nature = simple;
+            @nature = single;
             type = float;
         }
 
         size: Field {
             @potency = 3;
             @level = 3;
-            @nature = simple;
+            @nature = single;
             type = float;
         }
     }
@@ -52,14 +52,14 @@ BasicPartModelType: Node {
         weight: Field {
             @potency = 3;
             @level = 3;
-            @nature = simple;
+            @nature = single;
             type = float;
         }
 
         size: Field {
             @potency = 3;
             @level = 3;
-            @nature = simple;
+            @nature = single;
             type = float;
         }
     }
@@ -74,14 +74,14 @@ ComponentModelType: Node {
         weight: Field {
             @potency = 3;
             @level = 3;
-            @nature = simple;
+            @nature = single;
             type = float;
         }
 
         size: Field {
             @potency = 3;
             @level = 3;
-            @nature = simple;
+            @nature = single;
             type = float;
         }
     }
@@ -146,7 +146,7 @@ BicycleModel: BicycleModelType {
         salesPrice: Field {
             @potency = 1;
             @level = 2;
-            @nature = simple;
+            @nature = single;
         }
 
         description: Field {
@@ -173,13 +173,13 @@ WheelModel: ComponentModelType {
         weight: Field {
             @potency = 2;
             @level = 2;
-            @nature = simple;
+            @nature = single;
         }
 
         size: Field {
             @potency = 2;
             @level = 2;
-            @nature = simple;
+            @nature = single;
         }
     }
 }
@@ -193,13 +193,13 @@ FrameModel: ComponentModelType {
         weight: Field {
             @potency = 2;
             @level = 2;
-            @nature = simple;
+            @nature = single;
         }
 
         size: Field {
             @potency = 2;
             @level = 2;
-            @nature = simple;
+            @nature = single;
         }
     }
 }
@@ -213,13 +213,13 @@ SuspensionModel: BasicPartModelType {
         weight: Field {
             @potency = 2;
             @level = 2;
-            @nature = simple;
+            @nature = single;
         }
 
         size: Field {
             @potency = 2;
             @level = 2;
-            @nature = simple;
+            @nature = single;
         }
     }
 }
@@ -283,7 +283,7 @@ ChallengerA2-XL: BicycleModel {
         salesPrice: Field {
             @potency = 0;
             @level = 1;
-            @nature = simple;
+            @nature = single;
             value = 2000;
         }
 
@@ -305,13 +305,13 @@ Wheel: WheelModel {
         weight: Field {
             @potency = 1;
             @level = 1;
-            @nature = simple;
+            @nature = single;
         }
 
         size: Field {
             @potency = 1;
             @level = 1;
-            @nature = simple;
+            @nature = single;
         }
     }
 }
@@ -325,13 +325,13 @@ Rocket-A1-XL: FrameModel {
         weight: Field {
             @potency = 1;
             @level = 1;
-            @nature = simple;
+            @nature = single;
         }
 
         size: Field {
             @potency = 1;
             @level = 1;
-            @nature = simple;
+            @nature = single;
         }
     }
 }
@@ -410,14 +410,14 @@ Frame134123: Rocket-A1-XL {
         weight: Field {
             @potency = 0;
             @level = 0;
-            @nature = simple;
+            @nature = single;
             value = 20;
         }
 
         size: Field {
             @potency = 0;
             @level = 0;
-            @nature = simple;
+            @nature = single;
             value = 2;
         }
     }
@@ -432,14 +432,14 @@ FrontWheel134123: Wheel {
         weight: Field {
             @potency = 0;
             @level = 0;
-            @nature = simple;
+            @nature = single;
             value = 4;
         }
 
         size: Field {
             @potency = 0;
             @level = 0;
-            @nature = simple;
+            @nature = single;
             value = 0.5;
         }
     }
@@ -454,14 +454,14 @@ RearWheel134123: Wheel {
         weight: Field {
             @potency = 0;
             @level = 0;
-            @nature = simple;
+            @nature = single;
             value = 4;
         }
 
         size: Field {
             @potency = 0;
             @level = 0;
-            @nature = simple;
+            @nature = single;
             value = 0.5;
         }
     }

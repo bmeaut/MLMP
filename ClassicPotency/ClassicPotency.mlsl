@@ -1,6 +1,6 @@
 annotations {
     mutable potency in {0..*} on ModelElement, Field;
-	immutable nature in {simple, dual} on Field;
+	immutable nature in {single, dual} on Field;
 }
 
 rules {
@@ -10,7 +10,7 @@ rules {
       Node.potency = 0;
      }
 
-    #CP4: if (Field.nature = simple) {
+    #CP4: if (Field.nature = single) {
       if (Field.potency > 0) { Field.value = null; }
      }
 

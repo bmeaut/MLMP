@@ -7,7 +7,7 @@ annotations {
 rules {
     omit CP4, F1, F3;
 
-    #CP4: if (Field.nature = simple) {
+    #CP4: if (Field.nature = single) {
             if (Field.durability > 0) {
                 Field.value = null;
             }
